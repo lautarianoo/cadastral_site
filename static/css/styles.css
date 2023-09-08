@@ -1,0 +1,36 @@
+@charset 'UTF-8';
+
+.text-white:hover {
+    font-weight: bold;
+}
+
+.main-content {
+    margin-top: 80px;
+}
+
+.title-main {
+    font-weight: bold;
+    text-align: center;
+    font-size: 30px;
+}
+
+.member-table {
+    background-color: white;
+    width: 100%;
+}
+
+th {
+    text-align: center;
+    padding: 15px 30px;
+    border: 0;
+    font-size: 14px;
+}
+
+thead th {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+tr {
+    border-bottom: 1px solid #D2D2D2!important;
+}

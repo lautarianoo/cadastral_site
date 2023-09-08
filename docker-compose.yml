@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  web:
+    # Берем Dockerfile из каталога app
+    build: .
+    # Запускаем тестовый сервер
+    command: python manage.py runserver 127.0.0.1:8000
+    # Открываем порт 8000 внутри и снаружи
+    ports:
+      - 8000:8000
