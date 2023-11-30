@@ -30,28 +30,28 @@ def get_cadastral_data(cadastral):
     nw = 3
     for cad in DATA.get("objects"):
         if cad.get("direction") == "north":
-            sheet[f"A{n}"] = f"{cad.get('cadastral_num')}, {cad.get('address')}, {cad.get('square')}"
+            sheet[f"A{n}"] = f"{cad.get('cadastral_num')}, {cad.get('address')}, {cad.get('square')}. {cad.get('task')}"
             n += 1
         if cad.get("direction") == "northeast":
-            sheet[f"B{ne}"] = f"{cad.get('cadastral_num')}, {cad.get('address')}, {cad.get('square')}"
+            sheet[f"B{ne}"] = f"{cad.get('cadastral_num')}, {cad.get('address')}, {cad.get('square')}. {cad.get('task')}"
             ne += 1
         if cad.get("direction") == "east":
-            sheet[f"C{e}"] = f"{cad.get('cadastral_num')}, {cad.get('address')}, {cad.get('square')}"
+            sheet[f"C{e}"] = f"{cad.get('cadastral_num')}, {cad.get('address')}, {cad.get('square')}. {cad.get('task')}"
             e += 1
         if cad.get("direction") == "southeastern":
-            sheet[f"D{se}"] = f"{cad.get('cadastral_num')}, {cad.get('address')}, {cad.get('square')}"
+            sheet[f"D{se}"] = f"{cad.get('cadastral_num')}, {cad.get('address')}, {cad.get('square')}. {cad.get('task')}"
             se += 1
         if cad.get("direction") == "south":
-            sheet[f"E{s}"] = f"{cad.get('cadastral_num')}, {cad.get('address')}, {cad.get('square')}"
+            sheet[f"E{s}"] = f"{cad.get('cadastral_num')}, {cad.get('address')}, {cad.get('square')}. {cad.get('task')}"
             s += 1
         if cad.get("direction") == "southwest":
-            sheet[f"F{sw}"] = f"{cad.get('cadastral_num')}, {cad.get('address')}, {cad.get('square')}"
+            sheet[f"F{sw}"] = f"{cad.get('cadastral_num')}, {cad.get('address')}, {cad.get('square')}. {cad.get('task')}"
             sw += 1
         if cad.get("direction") == "west":
-            sheet[f"G{w}"] = f"{cad.get('cadastral_num')}, {cad.get('address')}, {cad.get('square')}"
+            sheet[f"G{w}"] = f"{cad.get('cadastral_num')}, {cad.get('address')}, {cad.get('square')}. {cad.get('task')}"
             w += 1
         if cad.get("direction") == "northwest":
-            sheet[f"H{nw}"] = f"{cad.get('cadastral_num')}, {cad.get('address')}, {cad.get('square')}"
+            sheet[f"H{nw}"] = f"{cad.get('cadastral_num')}, {cad.get('address')}, {cad.get('square')}. {cad.get('task')}"
             nw += 1
     wb.save("data.xlsx")
 

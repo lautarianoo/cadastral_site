@@ -11,7 +11,7 @@ from selenium.common.exceptions import NoSuchElementException, ElementNotInterac
 DIRECTIONS_LIGHT = {"north": [0, 7], "south": [0, -7], "east": [-7, 0], "west": [7, 0], "northeast": [-7, 7], "southeastern": [-7, -7], "southwest": [7, -7], "northwest": [7, 7]}
 
 def parsing_cadastral(cadastral_num):
-
+    cadastrals = []
     data = {"objects": []}
 
     service = Service()
@@ -21,7 +21,7 @@ def parsing_cadastral(cadastral_num):
     options.add_experimental_option('useAutomationExtension', False)
     options.add_argument('--ignore-ssl-errors=yes')
     options.add_argument('--ignore-certificate-errors')
-    options.add_argument('headless')
+    #options.add_argument('headless')
     options.add_argument('--no-sandbox')
     browser = webdriver.Chrome(service=service, options=options)
     stealth(driver=browser,
@@ -78,11 +78,13 @@ def parsing_cadastral(cadastral_num):
             time.sleep(4)
             items = browser.find_elements(By.CLASS_NAME, "info-item-container")
             if len(items) == 1:
-                #if browser.find_elements(By.CLASS_NAME, "expanding-box_content")[1].text == "Земельный участок":
-                data["objects"].append(
-                        {"direction": key, "address": browser.find_element(By.CLASS_NAME, "title-description").text,
-                         "square": browser.find_elements(By.CLASS_NAME, "expanding-box_content")[5].text,
-                         "cadastral_num": browser.find_element(By.CLASS_NAME, "number").text})
+                cadastral = browser.find_element(By.CLASS_NAME, "number").text
+                if cadastral not in cadastrals:
+                    data["objects"].append(
+                            {"direction": key, "address": browser.find_element(By.CLASS_NAME, "title-description").text,
+                             "square": browser.find_elements(By.CLASS_NAME, "expanding-box_content")[5].text, "task": browser.find_elements(By.CLASS_NAME, "expanding-box_content")[8].text,
+                             "cadastral_num": cadastral})
+                    cadastrals.append(cadastral)
             else:
                 i = 0
                 for item in items:
@@ -93,9 +95,11 @@ def parsing_cadastral(cadastral_num):
                         continue
                     time.sleep(3)
                     try:
-                        #if browser.find_elements(By.CLASS_NAME, "expanding-box_content")[1].text == "Земельный участок":
-                        data["objects"].append({"direction": key, "address": browser.find_element(By.CLASS_NAME, "title-description").text,
-                                            "square": browser.find_elements(By.CLASS_NAME, "expanding-box_content")[5].text, "cadastral_num": browser.find_element(By.CLASS_NAME, "number").text})
+                        cadastral = browser.find_element(By.CLASS_NAME, "number").text
+                        if cadastral not in cadastrals:
+                            data["objects"].append({"direction": key, "address": browser.find_element(By.CLASS_NAME, "title-description").text,
+                                                "square": browser.find_elements(By.CLASS_NAME, "expanding-box_content")[5].text, "task": browser.find_elements(By.CLASS_NAME, "expanding-box_content")[8].text,
+                                                    "cadastral_num": browser.find_element(By.CLASS_NAME, "number").text})
                         time.sleep(3)
                         browser.execute_script("window.history.go(-1)")
                     except (NoSuchElementException, ElementNotInteractableException):
